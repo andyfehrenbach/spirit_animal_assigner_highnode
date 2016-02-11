@@ -2,8 +2,8 @@
  * Created by cecollins on 2/11/16.
  */
 $(document).ready(function() {
-    $('#post-name').on('click', clickPostData);
-    $('#get-name').on('click', clickGetData);
+    $('#post-name-button').on('click', clickPostData);
+    $('#get-name-button').on('click', clickGetData);
 
 });
 
@@ -18,7 +18,7 @@ function clickPostData() {
 
     $.ajax({
         type: 'POST',
-        url: '/data/name',
+        url: '/name',
         data: values,
         beforeSend: function() {
             console.log('before!');
@@ -36,7 +36,7 @@ function clickGetData() {
     event.preventDefault();
     $.ajax({
         type: 'GET',
-        url: '/data/name',
+        url: '/name',
         success: function(data) {
             console.log(data);
         }

@@ -7,7 +7,9 @@ var data = require('./routes/data');
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', process.env.PORT || 5000);
 
-app.use('/data/name', data);
+app.use('/name', data);
+
+app.use('/animal', data);
 
 app.get('/*', function(req, res) {
     console.log("Here is the request: " , req.params);
