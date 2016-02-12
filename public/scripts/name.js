@@ -1,6 +1,9 @@
 /**
  * Created by cecollins on 2/11/16.
  */
+
+var values = {};
+
 $(document).ready(function() {
     clickPostData();
     $('#post-name-button').on('click', clickPostData);
@@ -10,7 +13,6 @@ $(document).ready(function() {
 
 function clickPostData() {
     event.preventDefault();
-    var values = {};
     $.each($('#post-name').serializeArray(), function(i, field) {
         values[field.name] = field.value;
     });
@@ -39,10 +41,17 @@ function clickGetData() {
     $.ajax({
         type: 'GET',
         url: '/name',
+        data: values,
         success: function(data) {
-            console.log(data);
+            var arrayIndex = (getRandomInt(0, (data.length)));
+            console.log(values);
+            //console.log(data);
         }
     });
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 //function fetchNames (){
