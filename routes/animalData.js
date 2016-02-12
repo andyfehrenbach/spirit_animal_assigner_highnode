@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var something = [];
+var animalArray= [];
 
 router.get('/', function(req, res) {
-    res.send({message: 'hello'});
+    res.send(animalArray);
 });
 
 router.post('/', function(req, res) {
-    console.log(req.body);
-    res.send(req.body);
+    animalArray.push(req.body);
+    console.log(animalArray);
+    res.send(animalArray);
 });
 
 module.exports = router;

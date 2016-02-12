@@ -2,17 +2,20 @@
  * Created by cecollins on 2/11/16.
  */
 
-var values = {};
+
 
 $(document).ready(function() {
-    clickPostData();
-    $('#post-name-button').on('click', clickPostData);
-    $('#get-name-button').on('click', clickGetData);
+    loadNameDom();
+    $('#post-name-button').on('click', clickPostNameData);
+    //$('#get-name-button').on('click', clickGetData);
 
 });
 
-function clickPostData() {
+function clickPostNameData() {
     event.preventDefault();
+
+    var values = {};
+
     $.each($('#post-name').serializeArray(), function(i, field) {
         values[field.name] = field.value;
     });
@@ -27,7 +30,7 @@ function clickPostData() {
             console.log('before!' + values.name);
         },
         success: function(data) {
-            refreshDom(data);
+            refreshNameDom(data);
             console.log('From Server: ', data);
             console.log(data);
         }
@@ -36,41 +39,38 @@ function clickPostData() {
 
 }
 
-function clickGetData() {
-    event.preventDefault();
+//function clickGetData() {
+//    event.preventDefault();
+//    $.ajax({
+//        type: 'GET',
+//        url: '/name',
+//        success: function(data) {
+//            var arrayIndex = (getRandomInt(0, (data.length)));
+//            console.log(data[arrayIndex]);
+//            $('#random-results').append('<p id="randomName"> Randomly Selected Name: ' + data[arrayIndex].name + '</p>');
+//        }
+//    });
+//}
+
+function loadNameDom() {
     $.ajax({
         type: 'GET',
         url: '/name',
-        data: values,
         success: function(data) {
-            var arrayIndex = (getRandomInt(0, (data.length)));
-            console.log(values);
-            //console.log(data);
+            refreshNameDom(data);
         }
     });
 }
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-//function fetchNames (){
-//    $.ajax({
-//        type: 'GET',
-//        url: '/name',
-//        success: function(data){
-//
-//            refreshDom(data);
-//        }
-//
-//    })
+//function getRandomInt(min, max) {
+//    return Math.floor(Math.random() * (max - min)) + min;
 //}
 
-function refreshDom(array){
-    $('#results').empty();
+function refreshNameDom(array){
+    $('#server-results').empty();
 
     for (var i = 0; i < array.length; i++){
-        $('#results').append('<h2>' + array[i].name + '</h2>');
+        $('#server-results').append('<p> Names from Server: ' + array[i].name + '</p>');
 
     }
 

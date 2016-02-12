@@ -4,7 +4,7 @@ var path = require('path');
 var nameArray = [];
 
 router.get('/', function(req, res) {
-    res.send({message: 'hello'});
+    res.send(nameArray);
 });
 
 router.post('/', function(req, res) {
