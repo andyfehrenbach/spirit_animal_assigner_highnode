@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 function clickPostData() {
     event.preventDefault();
-    var values = {};
+    var values = { };
     $.each($('#post-animal').serializeArray(), function(i, field) {
         values[field.name] = field.value;
     });
